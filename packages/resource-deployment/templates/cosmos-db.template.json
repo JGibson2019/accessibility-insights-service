@@ -22,6 +22,15 @@
             "metadata": {
                 "description": "CosmosDB account tier"
             }
+        },
+        "autoscaleMaxThroughput": {
+            "type": "int",
+            "defaultValue": 4000,
+            "minValue": 4000,
+            "maxValue": 1000000,
+            "metadata": {
+                "description": "Maximum throughput for the container"
+            }
         }
     },
     "resources": [
@@ -45,7 +54,12 @@
                         "locationName": "[parameters('location')]"
                     }
                 ],
-                "databaseAccountOfferType": "[parameters('tier')]"
+                "databaseAccountOfferType": "[parameters('tier')]",
+                "options": {
+                    "autoscaleSettings": {
+                        "maxThroughput": "[parameters('autoscaleMaxThroughput')]"
+                    }
+                }
             }
         }
     ]
